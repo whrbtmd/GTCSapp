@@ -1,0 +1,50 @@
+body{
+  text-align: center;
+}
+
+.AppWrap > div {
+    display: none;
+}
+
+.loginBtnLogin, .toStartPage, .toMapPage{
+  background-color: #6B9900;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+
+ .loginBtnJoin, .joinBtnJoin , .joinBtnCancel{
+   background-color: #6B9900;
+   border: none;
+   color: white;
+   padding: 15px 26px;
+   text-align: center;
+   text-decoration: none;
+   display: inline-block;
+   margin: 4px 2px;
+   cursor: pointer;
+   border-radius: 4px;
+ }
+
+li {
+	list-style-type: none;
+}
+
+input{
+  height: 25px;
+}
+.AppWrap {
+  margin-top: 80px;
+}
+
+.pname{
+  font-size: 100px;
+  text-shadow: 2px 2px 8px green;
+}

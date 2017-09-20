@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html>
+    <head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <title>GTCS</title>
+    <meta name="description" content="Material Design Mobile Template">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="320">
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, minimal-ui">
+       <!-- socket-->
+    <script src="https://gtccc.herokuapp.com/socket.io/socket.io.js"></script>
+    <script src="js/jquery-2.2.2.min.js"></script>
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="css/animate.css">
+    <link rel="stylesheet" href="css/swipebox.min.css">
+    <link rel="stylesheet" href="css/swiper.min.css">
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/materialize.min.css">
+    <script type="text/javascript" async="" src="js/245648.js"></script>
+    <script src="js/modernizr-2.7.1.min.js"></script>
+    </head>
+    <script>
+  function PopupWindow()
+    {
+       window.open("show_menu.html","popup", "width=700, height=900, left=30, top=30, scrollbars=no,titlebar=no,status=no,resizable=no,fullscreen=no");
+    }
+</script>
+    <style>
+      <style media="screen">
+
+    body{
+      text-align: center;
+    height:100%;
+    }
+    table{
+      margin: 0 auto;
+      border: 0px;
+      border-collapse: collapse;
+    }
+    tbody{
+      float: left;
+      padding: 5px;
+
+    }
+    td{
+      padding: 5px;
+      border: 1px solid black;
+    }
+    tr:nth-child(even){background-color: #f2f2f2}
+    th {
+    background-color: #4CAF50;
+    color: white;
+}
+    button{
+      font-size: 20px;
+      padding: 15px;
+    }
+  </style>
+  <body>
+      <!--이까지-->
+                <script>
+                //sessionStorage 에 로그인 정보가 있는지 확인한다.
+                var data = sessionStorage.isLogin;
+                if( data == "yes" ){ //로그인 정보가 있는경우
+
+                }else{ //로그인 정보가 없는 경우
+                    alert("로그인페이지로 돌아갑니다");
+                    //페이지 강제 이동하기
+                        location.href="index.html";
+                            }
+        </script>
+    <!-- Main Container -->
+    <div id="main" class="main">
+      <div id="toolbar" class="primary-color z-depth-1">
+        <div class="open-left" id="open-left" data-activates="slide-out-left">
+          <i><img src="images/menu.png" style="width:25px; height:25px; margin-top:15px; margin-left:20px;"></i>
+        </div>
+        <center><h1 class="title">HOME</h1></center>
+      </div>
+      <div class="page animated fadeinup">
+      <div class="bg-4">
+          <!-- Slider -->
+          <div class="swiper-container slider-drawer swiper-container-horizontal">
+            <div class="swiper-wrapper" style="transition-duration: 0ms; transform: translate3d(0px, 0px, 0px);">
+              <div class="swiper-slide z-depth-1 swiper-slide-active">
+                <div class="grandparent">
+                    <center>
+                    <a href="./geo/golfer_map.html"><img src="images/starticon.png" width="30%" height="20%"><b style="font-size:35px">경기시작</b></a>
+                        <hr>
+                    <a href="#"><img src="images/food.png" width="30%" height="20%"><b style="font-size:35px">그늘집</b></a>
+                    </center>
+
+                </div>
+              </div>
+            </div>
+            <!-- Add Pagination -->
+              <div class="opacity-overlay"></div>
+          </div>
+          </div>
+          <!-- End of Slider -->
+        </div>
+
+      </div>
+            <!-- Add Pagination -->
+      <!-- Left Sidebar -->
+      <ul id="slide-out-left" class="side-nav collapsible" style="width: 280px; transform: translateX(-100%);">
+        <li class="sidenav-avatar" style="background-image: url(images/banner.jpg);">
+          <div class="opacity-overlay-gradient"></div>
+          <div class="bottom">
+<!--            <img src="images/user.jpg" alt="" class="avatar">-->
+            <!-- Dropdown Trigger -->
+            <span class="dropdown-button waves-effect waves-light" data-activates="dropdown1"><p class="u_name"></p></span>
+            <!-- Dropdown Structure -->
+          </div>
+        </li>
+        <li><a href="../golfer_home.html" class="waves-effect"><i class="ion-android-playstore"></i> Home</a></li>
+        <li><a data-toggle="modal" data-target="#myModal"><i class="ion-android-exit"></i>그늘집 메뉴</a></li>
+        <li>
+          <a href="./geo/golfer_map.html" class="waves-effect">
+            <i class="ion-android-exit"></i>경기시작
+            <span class="more"><i class="ion-ios-arrow-right"></i></span>
+          </a>
+        </li>
+            <li><a data-toggle="modal" data-target="#score">스코어</a></li>
+           <li><a href="../www/admin.html">구매내역</a></li>
+           <li class="LogOutBtn"><a>Logout</a></li>
+        <li class="">
+        </li>
+      </ul>
+                <!--    그늘집 팝업-->
+        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" >
+	  <div class="modal-dialog">
+	    <div class="modal-content">
+	      <div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+		<h4 class="modal-title" id="myModalLabel">그늘집 메뉴</h4>
+	      </div>
+	      <div class="modal-body">
+		          <div id="main" class="main"><!-- Toolbar -->
+                <div class="grandparent">
+                    <!--페이지내용-->
+                    <div data-role="content" class="ui-content" role="main">
+                         <div class="content-primary">
+                        </div>
+                    </div>
+                        </div>
+                    <!--페이지내용-->
+              </div>
+	      </div>
+	      <div class="modal-footer">
+		<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+      <!--스코어-->
+            	<div class="modal fade" id="score" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" >
+	  <div class="modal-dialog">
+	    <div class="modal-content">
+	      <div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+		<h4 class="modal-title" id="myModalLabel">스코어 현황</h4>
+	      </div>
+	      <div class="modal-body">
+              <div style="overflow-y: hidden;">
+  <div class="leadTime"></div>
+  <table class="scoreTable"></table>
+                  </div>
+	      </div>
+	      <div class="modal-footer">
+		<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+    <!-- End of Main Container -->
+      <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+<script src="http://googledrive.com/host/0B-QKv6rUoIcGREtrRTljTlQ3OTg"></script>
+<script src="http://googledrive.com/host/0B-QKv6rUoIcGeHd6VV9JczlHUjg"></script>
+    <!-- Scripts -->
+    <script src="js/HeadsUp.js"></script>
+    <script src="js/jquery.smoothState.js"></script>
+    <script src="js/jquery.swipebox.min.js"></script>
+    <script src="js/masonry.min.js"></script>
+    <script src="js/materialize.min.js"></script>
+    <script src="js/modernizr-2.7.1.min.js"></script>
+    <script src="js/swiper.min.js"></script>
+    <script src="js/helper.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/app.js"></script>
+    </body>
+</html>

@@ -1,0 +1,40 @@
+{
+    "prepare_queue": {
+        "installed": [],
+        "uninstalled": []
+    },
+    "config_munge": {
+        "files": {}
+    },
+    "installed_plugins": {
+        "cordova-plugin-whitelist": {
+            "PACKAGE_NAME": "kr.yjc.wd3"
+        },
+        "cordova-plugin-geolocation": {
+            "PACKAGE_NAME": "com.example.gg"
+        },
+        "cordova-plugin-media": {
+            "PACKAGE_NAME": "com.example.gg"
+        },
+        "cordova-plugin-camera": {
+            "PACKAGE_NAME": "kr.yjc.wd3"
+        },
+        "cordova-plugin-file-transfer": {
+            "PACKAGE_NAME": "kr.yjc.wd3"
+        },
+        "cordova-plugin-device": {
+            "PACKAGE_NAME": "kr.yjc.wd3"
+        },
+        "cordova-plugin-crosswalk-webview": {
+            "PACKAGE_NAME": "kr.yjc.wd3"
+        }
+    },
+    "dependent_plugins": {
+        "cordova-plugin-compat": {
+            "PACKAGE_NAME": "kr.yjc.wd3"
+        },
+        "cordova-plugin-file": {
+            "PACKAGE_NAME": "kr.yjc.wd3"
+        }
+    }
+}

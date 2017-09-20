@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html>
+    <head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <title>GTCS</title>
+    <meta name="description" content="Material Design Mobile Template">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="320">
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, minimal-ui">
+       <!-- socket-->
+    <script src="https://gtccc.herokuapp.com/socket.io/socket.io.js"></script>
+    <script src="js/jquery-2.2.2.min.js"></script>
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="css/animate.css">
+    <link rel="stylesheet" href="css/swipebox.min.css">
+    <link rel="stylesheet" href="css/swiper.min.css">
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/materialize.min.css">
+    <script type="text/javascript" async="" src="js/245648.js"></script>
+    <script src="js/modernizr-2.7.1.min.js"></script>
+    <script src="geo/css/sweetalert.min.js"></script> 
+    <link rel="stylesheet" type="text/css" href="geo/css/sweetalert.css">
+    </head>
+  <body>
+      <!--채팅 test-->
+       <script>
+     $(document).ready(function(){
+    var uid= sessionStorage.user;
+    var socket = io.connect('https://gtccc.herokuapp.com'); 
+    socket.on('connect', function(){
+        socket.emit('user', uid);
+	});
+
+        $(document).on("click",'.chatbtnclick', function(){
+           socket.emit('guestjoin', $(this).attr('data-id'));
+                     //채팅 신청 시 말뜨게 하기
+                     if($(this).attr('data-id') != uid){
+                         window.alert(''+$(this).attr('data-id')+'님에게 채팅신청');
+                         socket.emit('req_join', $(this).attr('data-id'));
+            $('.select_room').hide();
+            $('#conversation').empty();             
+            $('.chating').show();
+                     }
+            });
+    socket.on('res_join', function(data){
+        if(data == uid){
+            window.confirm('채팅요청!');
+        socket.emit('res_join2', data);
+            $('.select_room').hide();
+            $('#conversation').empty();
+            $('.chating').show();
+            }
+    })     
+    
+	socket.on('recvmsg', function (username, data) {
+		$('#conversation').append('<b>'+username + ':</b> ' + data + '<br>');
+		if ($('#scrolldiv').prop('scrollHeight') > $('#scrolldiv').height())
+			$('#scrolldiv').scrollTop($('#scrolldiv').prop('scrollHeight'));
+	});
+	socket.on('servernoti', function (col, data) {
+		$('#conversation').append('<b><font color='+col+'>' + data + '</font></b><br>');
+		if ($('#scrolldiv').prop('scrollHeight') > $('#scrolldiv').height())
+			$('#scrolldiv').scrollTop($('#scrolldiv').prop('scrollHeight'));
+	});	
+
+	$(function(){
+		$('#data').keypress(function(e) {
+			if(e.which == 13) {
+				$(this).blur();
+				$('#datasend').focus().click();
+				$('#data').focus();
+			}
+		});
+		
+		$('#datasend').click( function() {
+			var message = $('#data').val();
+			$('#data').val('');
+			socket.emit('sendmsg', message);
+		});		
+	});
+        $(document).on("click",'.roomexit', function(){
+            if(window.confirm('채팅방을 나가시겠습니까?')){
+            socket.emit('roomexit');
+            $('.chating').hide();
+            $('.select_room').show();
+                                               }
+            });
+});
+</script>
+      <!--이까지-->
+                <script>
+                //sessionStorage 에 로그인 정보가 있는지 확인한다.
+                var data = sessionStorage.isLogin;
+                if( data == "yes" ){ //로그인 정보가 있는경우
+
+                }else{ //로그인 정보가 없는 경우 
+                    alert("로그인페이지로 돌아갑니다");
+                    //페이지 강제 이동하기 
+                        location.href="../www/index.html";
+                            }
+        </script>
+    <!-- Main Container -->
+    <div id="main" class="main">
+      <div id="toolbar" class="primary-color z-depth-1">
+        <div class="open-left" id="open-left" data-activates="slide-out-left">
+          <i><img src="images/menu.png" style="width:25px; height:25px; margin-top:15px; margin-left:20px;"></i>
+        </div>
+        <center><h1 class="title">HOME</h1></center>
+      </div>
+      <div class="page animated fadeinup">
+      <div class="bg-4">
+          <!-- Slider -->         
+          <div class="swiper-container slider-drawer swiper-container-horizontal">
+            <div class="swiper-wrapper" style="transition-duration: 0ms; transform: translate3d(0px, 0px, 0px);">
+              <div class="swiper-slide z-depth-1 swiper-slide-active">
+                <div class="grandparent">
+                    <center>
+                    <div id="startPlay"><img src="images/starticon.png" width="30%" height="20%"><b style="font-size:35px">경기시작</b></div>
+                        <hr>
+                    <a href="../www/geo/infoPage.html"><img src="images/food.png" width="30%" height="4%"><b style="font-size:35px">그늘집</b></a> 
+                    </center>
+                </div>
+              </div>
+            </div>
+              <div class="opacity-overlay"></div>
+          </div>
+          </div>
+          <!-- End of Slider -->
+        </div>
+      
+      </div> 
+            <!-- Add Pagination -->
+      <!-- Left Sidebar -->
+      <ul id="slide-out-left" class="side-nav collapsible" style="width: 280px; transform: translateX(-100%);">
+        <li class="sidenav-avatar" style="background-image: url(images/banner.jpg);">
+          <div class="opacity-overlay-gradient"></div>
+          <div class="bottom">
+<!--            <img src="images/user.jpg" alt="" class="avatar">-->
+            <!-- Dropdown Trigger -->
+            <span class="dropdown-button waves-effect waves-light" data-activates="dropdown1"><p class="u_name"></p></span>
+            <!-- Dropdown Structure -->
+          </div>
+        </li>
+        <li><a href="./home.html" class="waves-effect"><i class="ion-android-playstore"></i> Home</a></li>
+        <li>
+          <div class="collapsible-header waves-effect">
+            <i class="ion-android-exit"></i>그늘집<span class="more"><i class="ion-ios-arrow-right"></i></span>
+          </div>
+          <div class="collapsible-body" style="">
+            <ul class="collapsible" id="MenuBtn">
+              <li>
+                <a  href="javascript:PopupWindow()">메뉴보기</a>
+                <a href="../www/show_menu_list.html" class="caddie">주문 리스트보기</a>
+                <a href="../www/show_menu_list_ck.html" class="caddie">최종주문 확인</a>
+              </li>
+            </ul>
+          </div>  
+        </li>
+        <li>
+          <a class="waves-effect" id="startPlay">
+            <i class="ion-android-exit"></i>경기시작
+            <span class="more"><i class="ion-ios-arrow-right"></i></span>
+          </a>
+        </li>
+           <li class="LogOutBtn"><a>Logout</a></li>
+        <li class="">
+        </li>
+      </ul>
+    <!-- End of Main Container -->
+    
+    <!-- Scripts -->
+    <script src="js/HeadsUp.js"></script>
+    <script src="js/jquery.smoothState.js"></script>
+    <script src="js/jquery.swipebox.min.js"></script>
+    <script src="js/masonry.min.js"></script>
+    <script src="js/materialize.min.js"></script>
+    <script src="js/modernizr-2.7.1.min.js"></script>
+    <script src="js/swiper.min.js"></script>
+    <script src="js/helper.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/app.js"></script>
+    </body>
+</html>

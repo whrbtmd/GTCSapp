@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <script src="jquery-2.2.2.min.js"></script>
+  <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+  <script src="./js/endPage.js"></script>
+    <script src="js/backButtonDisable.js"></script>
+    <!--alert 부트-->
+<script src="css/sweetalert.min.js"></script> 
+<link rel="stylesheet" type="text/css" href="css/sweetalert.css">
+  <title>endPage</title>
+  <style media="screen">
+
+    body{
+      text-align: center;
+    height:100%;
+    }
+    table{
+      margin: 0 auto;
+      border: 0px;
+      border-collapse: collapse;
+    }
+    tbody{
+      float: left;
+      padding: 5px;
+
+    }
+    td{
+      padding: 5px;
+      border: 1px solid black;
+    }
+    tr:nth-child(even){background-color: #f2f2f2}
+    th {
+    background-color: #4CAF50;
+    color: white;
+}
+    button{
+      font-size: 20px;
+      padding: 15px;
+    }
+  </style>
+</head>
+<body style="overflow-y: hidden;">
+  <img width =100% src ="image/title.png" />
+  <h3>게임이 끝났습니다!!!</h3>
+  <div class="leadTime"></div>
+  <table class="scoreTable"></table>
+      <img class="toInfoPage" src="image/return.png" width=30% />
+  <img width =100% src ="image/foot.png" id="resetBtn">
+</body>
+</html>

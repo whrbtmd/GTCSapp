@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+    <head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <!--alert-->
+    <script src="geo/css/sweetalert.min.js"></script> 
+    <link rel="stylesheet" type="text/css" href="geo/css/sweetalert.css">
+    <link rel="stylesheet" href="css/jquery.mobile-1.4.0.min.css">
+    </head>
+  <body>
+    <script language="javascript">            
+function send(form) {
+    $.ajax({
+ url: "https://shielded-fortress-32957.herokuapp.com/php/order.php",
+ type: "POST",
+ data: $("form.ajax"+form.food_name.value).serialize(),
+ success: function(msg){
+  }
+ });
+  swal("예약완료!", "예약메뉴에 등록되었습니다.")
+}
+</script>
+    <!-- Main Container -->
+    <div id="main" class="main"><!-- Toolbar -->
+                <div class="grandparent" style="margin-top:20%;">    
+                    <!--페이지내용-->
+                    <div data-role="content" class="ui-content" role="main" style="width: 100%; height:100%;">
+                         <div class="content-primary" style="margin-bottom:3%;">
+                        </div>
+                    </div>
+                        </div>        
+                    <!--페이지내용-->
+              </div>
+
+    <script src="js/jquery-2.2.2.min.js"></script>
+    <script src="js/app.js"></script>
+
+    </body>
+</html>

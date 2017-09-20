@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <script src="jquery-2.2.2.min.js"></script> 
+  <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+       <script src="https://gtccc.herokuapp.com/socket.io/socket.io.js"></script>
+       <script src="./js/start.js"></script>
+         <script src="./js/watchpos.js"></script>
+            <!--무전기-->
+         <script src="https://cloud.apizee.com/libs/jquery-1.9.0.min.js"></script>
+ <script src="cordova.js"></script>
+ <script src="https://cloud.apizee.com/apiRTC/apiRTC-latest.min.js"></script>
+    <script src="js/backButtonDisable.js"></script>
+<!--alert 부트-->
+<script src="css/sweetalert.min.js"></script>
+<link rel="stylesheet" type="text/css" href="css/sweetalert.css">
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="../css/animate.css">
+    <link rel="stylesheet" href="../css/swipebox.min.css">
+    <link rel="stylesheet" href="../css/swiper.min.css">
+    <link rel="stylesheet" href="../css/normalize.css">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="../css/materialize.min.css">
+        <script type="text/javascript" async="" src="../js/245648.js"></script>
+    
+  <title>holeStartPage</title>
+  <style media="screen">
+    body {
+      text-align: center;
+    }
+    .HeightPadding{
+      margin-top: 100px;
+    }
+
+  </style>
+</head>
+            <script language="javascript">            
+function send(form) {
+    $.ajax({
+ url: "https://shielded-fortress-32957.herokuapp.com/php/order.php",
+ type: "POST",
+ data: $("form.ajax"+form.food_name.value).serialize(),
+ success: function(msg){
+  }
+ });
+  swal("예약완료!", "예약메뉴에 등록되었습니다.")
+}
+</script>
+<!--    이까지-->
+  <body onload="onLoad()">
+<!--      <br>
+      <br>-->
+<!-- <input type="text" id="number" value='' placeholder="Enter Destination ID"/>
+ <span id="status">Registration Ongoing</span>
+ -->
+ <div id="myRemoteVideo" style="display:none"></div>
+ <video width="30%" height="30%" id="myMiniVideo" autoplay="autoplay" style="display:none"></video>
+ 
+ <script>
+var socket = io.connect('https://gtccc.herokuapp.com'); 
+     
+ function incomingCallHandler(e) {
+ apiRTC.addEventListener("remoteHangup", remoteHangupHandler);
+ $('#hangup').show();
+$('#adcall').hide();
+ }
+ 
+ function remoteHangupHandler(e) {
+      $('#hangup').hide();
+     $('#adcall').show(); 
+ }
+ 
+ function userMediaErrorHandler(e) {
+ }
+ 
+ function sessionReadyHandler(e) {
+ 
+ apiRTC.addEventListener("incomingCall", incomingCallHandler);
+ apiRTC.addEventListener("userMediaError", userMediaErrorHandler);
+ 
+ var webRTCClient = apiCC.session.createWebRTCClient({
+ minilocalVideo : "myMiniVideo",
+ remoteVideo : "myRemoteVideo",
+ status : "status"
+ });
+
+ $(document).on("click",'#call', function(){
+ swal({   title: "알림",
+       text: "통화연결을 하시겠습니까?",
+       type: "warning",
+       showCancelButton: true,
+       confirmButtonColor: "#5CD1E5", 
+       confirmButtonText: "연결",
+       cancelButtonText: "취소", 
+       closeOnConfirm: false,   closeOnCancel: false }, 
+      function(isConfirm){  
+     if (isConfirm) {     
+         swal("성공", "연결 되었습니다.", "success"); 
+           apiRTC.addEventListener("remoteHangup", remoteHangupHandler);
+            destNumber = call.value;
+            webRTCClient.call(destNumber);
+            $('#adcall').hide();
+            $('#hangup').show();
+     } else {   
+         swal("취소", "취소 하셨습니다.", "error");
+     } });
+ });
+  $(document).on("click",'#adcall', function(){
+      var curid = sessionStorage.user;
+      socket.emit('calluser', curid);
+ swal({   title: "알림",
+       text: "통화연결을 하시겠습니까?",
+       type: "warning",
+       showCancelButton: true,
+       confirmButtonColor: "#5CD1E5", 
+       confirmButtonText: "연결",
+       cancelButtonText: "취소", 
+       closeOnConfirm: false,   closeOnCancel: false }, 
+      function(isConfirm){  
+     if (isConfirm) {
+         swal("성공", "연결 되었습니다.", "success"); 
+           apiRTC.addEventListener("remoteHangup", remoteHangupHandler);
+            destNumber = "1234";
+            webRTCClient.call(destNumber);
+         $('#adcall').hide();
+            $('#hangup').show();
+     } else {   
+         swal("취소", "취소 하셨습니다.", "error");
+     }    
+ });
+ });    
+  $(document).on("click",'#hangup', function(){
+    swal({   title: "알림",  
+          text: "연결을 종료하시겠습니까?", 
+          type: "warning",   showCancelButton: true, 
+          confirmButtonColor: "#DD6B55", 
+          confirmButtonText: "종료",  
+          closeOnConfirm: false }, function(){  
+        swal("종료", "연결이 종료되었습니다.", 
+             "success"); 
+         webRTCClient.hangUp();
+        $('#hangup').hide();
+        $('#adcall').hide();
+    });  
+ });
+ }
+ 
+ function onDeviceReady() {
+ 
+ if (device.platform == 'iOS'){
+ cordova.plugins.iosrtc.registerGlobals();
+ }
+ }
+ 
+ function onLoad() {
+ 
+ apiRTC.init({
+ apiCCId : sessionStorage.userno,
+ onReady: sessionReadyHandler,
+ apiKey : "813b5d0f13ebaa1093fa118e43c35903"
+ });
+ 
+ document.addEventListener("deviceready", onDeviceReady, false);
+ }
+
+     /* <!--채팅 test-->*/
+  
+     $(document).ready(function(){
+    var uid= sessionStorage.user;
+            $(document).on("click",'#chatbtnclick2', function(){
+                    var idd = chatbtnclick2.value;
+                    var cuid = uid
+                        /*socket.emit('guestjoin', idd);*/
+                     //채팅 신청 시 말뜨게 하기
+                        swal({   
+                              title: idd+"님에게 전송",   
+                              text: "메세지를 입력하세요",   
+                              type: "input",
+                              showCancelButton: true,  
+                              closeOnConfirm: false, 
+                              animation: "slide-from-top",  
+                              inputPlaceholder: "내용" },
+                             function(inputValue){   
+                            if (inputValue === false) return false;   
+                            if (inputValue === "") {   
+                                swal.showInputError("입력값이 없습니다");  
+                                return false 
+                            }
+                            socket.emit('req_join', idd, inputValue,cuid);
+                            swal("전송완료", "메세지: " + inputValue, "success");
+                 });
+            });
+            $(document).on("click",'#admsg', function(){
+                    var idd = "admin";
+                    var cuid = uid
+                        /*socket.emit('guestjoin', idd);*/
+                     //채팅 신청 시 말뜨게 하기
+                        swal({   
+                              title: idd+"님에게 전송",   
+                              text: "메세지를 입력하세요",   
+                              type: "input",
+                              showCancelButton: true,  
+                              closeOnConfirm: false, 
+                              animation: "slide-from-top",  
+                              inputPlaceholder: "내용" },
+                             function(inputValue){   
+                            if (inputValue === false) return false;   
+                            if (inputValue === "") {   
+                                swal.showInputError("입력값이 없습니다");  
+                                return false 
+                            }
+                            socket.emit('req_join', idd, inputValue,cuid);
+                            swal("전송완료", "메세지: " + inputValue, "success");
+                 });
+            });
+    socket.on('res_join', function(idd,inputValue,cuid){
+        if(idd == uid){
+            var audio = new Audio("image/mgso.mp3");
+                                audio.play()
+                        swal({title: cuid+"님의 메세지",   
+                              text: inputValue ,   
+                              type: "input",
+                              showCancelButton: true,  
+                              closeOnConfirm: false, 
+                              animation: "slide-from-top",  
+                              inputPlaceholder: "답장" },
+                             function(inputValue){   
+                            if (inputValue === false) return false;   
+                            if (inputValue === "") {   
+                                swal.showInputError("입력값이 없습니다");     return false   }
+                            swal("전송완료", "메세지: " + inputValue, "success");
+                         socket.emit('req_again', cuid, inputValue,idd);
+                         });
+        }
+    }) 
+        socket.on('res_again', function(cuid,inputValue,idd){
+        if(cuid == uid){
+                        var audio = new Audio("image/mgso.mp3");
+                                audio.play()
+                        swal({title: idd+"님의 메세지",   
+                              text: inputValue ,   
+                              type: "input",
+                              showCancelButton: true,  
+                              closeOnConfirm: false, 
+                              animation: "slide-from-top",  
+                              inputPlaceholder: "답장" },
+                             function(inputValue){   
+                            if (inputValue === false) return false;   
+                            if (inputValue === "") {   
+                                swal.showInputError("입력값이 없습니다");     return false   }    
+                            swal("전송완료", "메세지: " + inputValue, "success");
+                          socket.emit('req_join', idd, inputValue,cuid);
+                         });
+        }
+    })  
+                         socket.on('adminmg', function(inputValue){
+                     var audio = new Audio("image/mgso.mp3");
+                                audio.play()
+                    swal("관리자", inputValue)
+        
+    }); 
+});
+</script>
+    <div id="main" class="main">
+      <div id="toolbar" class="primary-color z-depth-1">
+        <div class="open-left" id="open-left" data-activates="slide-out-left">
+          <i><img src="../images/menu.png" style="width:25px; height:25px; margin-top:15px; margin-left:20px;"></i>
+        </div>    
+    <img src="image/Alarm_Arrow_Left_Icon_256.png" class="ballLeft" style="width:50px; margin-right:3px;margin-left:8px;">
+    <img src="image/Arrow%20Up.png" class="ballTop" style="width:50px; margin-right:3px">
+    <img src="image/Arrow%20Right.png" class="ballRight" style="width:50px;margin-right:6px">
+    
+    <button id="admsg" style="background:none; border:none; margin-left:10px;"><img src="image/chat.png" style="width:40px;height:40px;margin-right:0px"></button>
+    <button id="adcall" style="background:none; border:none;"><img src="image/call.png" style="width:40px;height:40px;margin-left:0px;"></button>
+    <button id='hangup'; style='background:none;float:right;display:none;'><img src='image/exit.png' style='width:40px;height:40px;float:right'></button>
+      </div>
+      <div class="page animated fadeinup">
+        </div>
+      
+      </div> 
+          <ul id="slide-out-left" class="side-nav collapsible" style="width: 280px; transform: translateX(-100%);">
+        <li class="sidenav-avatar" style="background-image: url(images/banner.jpg);">
+          <div class="opacity-overlay-gradient"></div>
+          <div class="bottom">
+            <!-- Dropdown Trigger -->
+            <span class="dropdown-button waves-effect waves-light" data-activates="dropdown1"><p class="u_name"></p></span>
+            <!-- Dropdown Structure -->
+          </div>
+        </li>
+        <li><a href="../home.html" class="waves-effect"><i class="ion-android-playstore"></i> Home</a></li>
+        <li>
+          <div class="collapsible-header waves-effect">
+            <i class="ion-android-exit"></i>그늘집<span class="more"><i class="ion-ios-arrow-right"></i></span>
+          </div>
+          <div class="collapsible-body" style="">
+            <ul class="collapsible" id="MenuBtn">
+              <li>
+                <a data-toggle="modal" data-target="#myModal">메뉴보기</a>
+                <a data-toggle="modal" data-target="#order">주문 리스트보기</a>
+                <a href="../show_menu_list_ck.html" class="caddie">최종주문 확인</a>
+              </li>
+            </ul>
+          </div>  
+        </li>
+        <li>
+          <a href="infoPage.html" class="waves-effect">
+            <i class="ion-android-exit"></i>경기시작
+            <span class="more"><i class="ion-ios-arrow-right"></i></span>
+          </a>
+        </li>
+           <li class="adminbtn"><a href="../www/admin.html">회원관리</a></li>
+           <li class="LogOutBtn"><a>Logout</a></li>
+        <li class="">
+        </li>
+      </ul>
+     <div id="myRemoteVideo" style="display:none"></div>
+ <video width="30%" height="30%" id="myMiniVideo" autoplay="autoplay" style="display:none"></video>
+ 
+  <img width =100% src ="image/title.png" />
+  <div class="Main">
+
+  <div class="HeightPadding"></div>
+    <div class="Items">
+    </div>
+    <!-- 확인시 처음 홀에 대한 페이지가 나타남(map.html 사용) -->
+    <br /><br />
+    <img class="toMapPage" src="image/play.png" width=15% /><br>
+<!--      나중에지울것-->
+      <button class="testbtn">endpage</button>
+<!--      여기까지-->
+    <br /><br /><br /><br />
+  </div>
+  <img width =100% src ="image/foot.png" />
+        <script src="../js/HeadsUp.js"></script>
+    <script src="../js/jquery.smoothState.js"></script>
+    <script src="../js/jquery.swipebox.min.js"></script>
+    <script src="../js/masonry.min.js"></script>
+    <script src="../js/materialize.min.js"></script>
+    <script src="../js/modernizr-2.7.1.min.js"></script>
+    <script src="../js/swiper.min.js"></script>
+    <script src="../js/helper.js"></script>
+    <script src="../js/main.js"></script>
+</body>
+      </html>

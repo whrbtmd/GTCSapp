@@ -1,0 +1,59 @@
+<!--
+Author: W3layouts
+Author URL: http://w3layouts.com
+License: Creative Commons Attribution 3.0 Unported
+License URL: http://creativecommons.org/licenses/by/3.0/
+-->
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Login</title>
+		<meta charset="utf-8">
+		<link href="css/style.css" rel='stylesheet' type='text/css' />
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+        <script src="./js/jquery-2.2.2.min.js"></script>
+        <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+        <script src="./js/login.js"></script>
+        <script src="geo/css/sweetalert.min.js"></script> 
+    <link rel="stylesheet" type="text/css" href="geo/css/sweetalert.css">
+    <!-- Stylesheets -->
+    <script src="js/swiper.min.js"></script>
+		<!--webfonts-->
+		<link href='http://fonts.googleapis.com/css?family=Open+Sans:600italic,400,300,600,700' rel='stylesheet' type='text/css'>
+		<!--//webfonts-->
+</head>
+<body style="overflow:hidden">
+	 <!-----start-main---->
+	 <div class="main" style="overflow-y: hidden;">
+		<div class="login-form" style="display:none;">
+			<h1><img src="images/logo.png" style="width:300px ; height:120px; border-radius:10px;"></h1>
+					<div class="head">
+						<img src="images/user.png" alt=""/>
+					</div>
+				<form>
+						<input type="text" class="loginTxtID" value="yjy" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'USERNAME';}" >
+						<input type="password" class="loginTxtPW" value="1" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Password';}">
+						 <button class="loginBtnLogin">Login</button>
+                    <p class="loginBtnJoin">회원가입</p>
+				</form>
+			</div>
+			<!--//End-login-form-->
+         		<div class="sign-form" style="display:none">
+			<h1>Sign-up</h1>
+					<div class="head">
+						<img src="images/user.png" alt=""/>
+					</div>
+				<form>  
+						<input type="text" class="joinTxtID" value="USERNAME" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'USERNAME';}" >
+						<input type="text" class="joinTxtPW" value="Password" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Password';}">
+                        <input type="text" class="joinTxtPWC" value="Password Check" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Password';}">
+						 <button class="joinBtnJoin">완료</button>
+                    <p class="joinBtnCancel">돌아가기</p>
+				</form>
+			</div>
+		</div>
+			 <!-----//end-main---->
+		 		
+</body>
+</html>

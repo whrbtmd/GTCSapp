@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+
+  <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <script src="jquery-2.2.2.min.js"></script>
+  <script src="./js/scoreInput.js"></script>
+    <script src="js/backButtonDisable.js"></script>
+    <!--alert 부트-->
+<script src="css/sweetalert.min.js"></script> 
+<link rel="stylesheet" type="text/css" href="css/sweetalert.css">
+  <title>ScoreInputPage</title>
+  <style>
+
+    body{
+      text-align: center;
+    }
+
+    tbody:hover{
+      background-color: #05C664;
+
+    }
+    table{
+      margin: 0 auto;
+      border: 0px;
+      border-collapse: collapse;
+    }
+    tbody{
+      float: left;
+      padding: 5px;
+
+    }
+    td{
+      padding: 10px;
+      border: 1px solid black;
+
+    }
+    .gname{
+      border : 0px !important;
+
+    }
+    button{
+      font-size: 20px;
+      padding: 15px;
+    }
+
+    .buttonsUp{
+      position: relative;
+      margin-top: 10%;
+    }
+    .buttonsDown{
+      position: relative;
+      margin-top: 2%;
+    }
+    .save{
+      position: relative;
+      margin-top: 5%;
+    }
+    .add{
+      position: fixed;
+      width: 70px;
+      height: 60px;
+    }
+    .sub{
+      position: fixed;
+      width: 70px;
+      height: 60px;
+    }
+  </style>
+
+</head>
+<body style="overflow-y: hidden;">
+
+    <img width =100% src ="image/title.png" />
+  <h2>스코어 입력</h2>
+
+      <div id="time"></div>
+      <div class="gName"></div>
+      <table class="scoreT">
+        <tbody>
+          <tr><td colspan=3 class="gname" id="gname1">g1</td></tr>
+          <tr><td>PA</td><td class="par"></td></tr>
+          <tr><td>S</td><td class="score" id="score1">0</td></tr>
+        </tbody>
+        <tbody>
+          <tr><td colspan=3 class="gname" id="gname2">g2</td></tr>
+          <tr><td>PA</td><td class="par"></td></tr>
+          <tr><td>S</td><td class="score" id="score2">0</td></tr>
+        </tbody>
+        <tbody>
+          <tr><td colspan=3 class="gname" id="gname3">g3</td></tr>
+          <tr><td>PA</td><td class="par"></td></tr>
+          <tr><td>S</td><td class="score" id="score3">0</td></tr>
+        </tbody>
+        <tbody>
+          <tr><td colspan=3 class="gname" id="gname4">g4</td></tr>
+          <tr><td>PA</td><td class="par"></td></tr>
+          <tr><td>S</td><td class="score" id="score4">0</td></tr>
+        </tbody>
+      </table>
+
+      <div class="buttonsUp">
+      <button class="subOne">-1</button>
+      <button class="zero">0</button>
+      <button class="one">1</button>
+      <img class="add" src="image/plus.png" width=5% />
+      </div>
+
+      <div class="buttonsDown">
+      <button class="two">2</button>
+      <button class="three">3</button>
+      <button class="four">4</button>
+      <img class="sub" src="image/minu.png" width=5%>
+      </div>
+      <div class="save">
+<img class="toStartPage" src="image/save.png" width=30% />
+</div>
+
+</body>
+</html>
